@@ -1,0 +1,22 @@
+{% extends 'base/base_dashboard.html' %}
+
+{% block title %}Dashboard del Doctor{% endblock %}
+
+{% block content %}
+<h1>Tomar Paciente</h1>
+
+<p>Asignar al paciente "{{ paciente.usuario }}" al Doctor : {{ request.user.doctor }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ paciente_form.as_p }}
+    {{ ficha_clinica_form.as_p }}
+    <button type="submit">Tomar Paciente y Crear Ficha Clínica</button>
+</form>
+<div class="text-center">
+    <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
+</div>
+  
+  
+{% endblock %}

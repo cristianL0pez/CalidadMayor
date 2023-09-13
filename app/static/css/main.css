@@ -1,0 +1,59 @@
+
+
+
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana gráfica */
+}
+
+.custom-header {
+    background-color: #333; /* Cambia esto según tu diseño */
+    color: white; /* Cambia esto según tu diseño */
+    padding: 10px 0;
+}
+
+.custom-header a {
+    color: white; /* Cambia el color de los enlaces */
+    text-decoration: none; /* Quita la subrayado de los enlaces */
+}
+
+.custom-header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.custom-header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+/* Estilos para el menú de navegación */
+.custom-header nav ul li a:hover {
+    /* Estilos de hover para los enlaces del menú */
+    color: #ff6600; /* Cambia el color al pasar el ratón por encima */
+}
+
+/* Estilos para la información del usuario en la esquina superior derecha */
+.user-info {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    color: white; /* Cambia esto según tu diseño */
+}
+
+
+
+
+
+
+
+
+
+
+
+

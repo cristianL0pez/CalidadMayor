@@ -1,0 +1,27 @@
+{% extends 'base/base_dashboard.html' %}
+
+{% block title %}Dashboard del Doctor{% endblock %}
+
+{% block content %}
+<h1>Lista de Pacientes sin Doctor</h1>
+
+{% if pacientes_sin_doctor %}
+<ul>
+    {% for paciente in pacientes_sin_doctor %}
+    <li>
+        {{ paciente.usuario }}
+        {% if not paciente.doctor %}
+        <a href="{% url 'tomar_paciente_y_ficha' paciente_id=paciente.id %}">Tomar Paciente</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay pacientes sin doctor.</p>
+{% endif %}
+<div class="text-center">
+    <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base/base_dashboard.html' %}
+
+{% block title %}Dashboard del Doctor{% endblock %}
+
+{% block content %}
+  <h2>Ficha del Paciente</h2>
+  <p>Nombre del Paciente: {{ paciente.usuario }}</p>
+  <p>Fecha de Nacimiento: {{ paciente.fecha_de_nacimiento }}</p>
+
+  <h3>Datos de la Ficha Clínica</h3>
+  <p>Fecha de Ingreso: {{ ficha_paciente.fecha_de_ingreso }}</p>
+  <p>Peso: {{ ficha_paciente.peso }} kg</p>
+  <p>Talla: {{ ficha_paciente.talla }} cm</p>
+  <p>Historia Clínica:</p>
+  <p>{{ ficha_paciente.historia_clinica }}</p>
+  <p>Examen Físico:</p>
+  <p>{{ ficha_paciente.examen_fisico }}</p>
+  <h3>Registros Diarios</h3>
+  <ul>
+    {% for registro in registros_diarios %}
+      <li>{{ registro.fecha }}: {{ registro.contenido }}</li>
+    {% empty %}
+      <li>No hay registros diarios.</li>
+    {% endfor %}
+    
+  </ul>
+  <hr>
+  <h3>Agregar Registro Diario</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit">Guardar Registro Diario</button>
+  </form>
+  <div class="text-center">
+    <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
+</div>
+  
+
+  <!-- Agregar otros campos de la ficha clínica aquí -->
+{% endblock %}

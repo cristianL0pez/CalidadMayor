@@ -1,0 +1,14 @@
+{% extends 'base/base_dashboard.html' %}
+
+{% block content %}
+  <h1>Subir Archivo</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ archivo_form.as_p }}
+    <button type="submit">Subir Archivo</button>
+  </form>
+  <div class="text-center">
+    <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
+</div>
+{% endblock %}

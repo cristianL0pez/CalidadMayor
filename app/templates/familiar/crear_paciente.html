@@ -1,0 +1,11 @@
+{% extends 'base/base_dashboard.html' %}
+
+{% block content %}
+    <h2>Crear Paciente</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Crear Paciente</button>
+    </form>
+    <a href="{% url 'familiar_dashboard' %}">Volver a la Lista de Pacientes</a>
+{% endblock %}

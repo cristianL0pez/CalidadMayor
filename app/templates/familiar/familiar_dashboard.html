@@ -1,0 +1,35 @@
+{% extends 'base/base_dashboard.html' %}
+
+{% block title %}Dashboard Familiar{% endblock %}
+
+{% block content %}
+    <!-- Contenido específico del dashboard de familiares -->
+    <h1>Bienvenido al Dashboard Familiar</h1>
+    <li><a href={% url 'crear_paciente' %}>crear paciente</a></li>
+    <h2>Tus familiares:</h2>
+    <ul>
+        {% for paciente, registros_diarios in pacientes_con_registros.items %}
+            <li>
+                <hr>
+                <p>Doctor a cargo: {{ paciente.doctor }}</p>
+                <p>Nombre del paciente: {{ paciente.usuario }}</p>
+                <p>Fecha de Nacimiento: {{ paciente.fecha_de_nacimiento }}</p>
+                <hr>
+                <!-- Mostrar los registros diarios del paciente -->
+                <hr>
+                <ul>
+                    <h2>Registros diarios:</h2>
+                    {% for registro in registros_diarios %}
+                        <li>{{ registro.fecha }}: {{ registro.contenido }}</li>
+                    {% empty %}
+                        <li>No hay registros diarios para este paciente.</li>
+                    {% endfor %}
+                </ul>
+                <hr>
+            </li>
+        {% empty %}
+            <p>No tienes familiares registrados.</p>
+        {% endfor %}
+    </ul>
+    {% block contenido_adicional %}{% endblock %}
+{% endblock %}

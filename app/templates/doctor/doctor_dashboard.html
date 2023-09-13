@@ -1,0 +1,23 @@
+{% extends 'base/base_dashboard.html' %}
+
+{% block title %}Dashboard del Doctor{% endblock %}
+
+{% block content %}
+  <h2>Panel de Doctor</h2>
+  
+  <h3>Mis Pacientes:</h3>
+  <ul>
+    {% for paciente in pacientes %}
+      <li>
+        <a href="{% url 'ficha_paciente' paciente.id %}">
+          {{ paciente.usuario }} - {{ paciente.fecha_de_nacimiento }}
+        </a>
+      </li>
+    {% empty %}
+      <li>No tienes pacientes asignados.</li>
+    {% endfor %}
+  </ul>
+  
+  <!-- Otras partes de tu panel de doctor aquí -->
+  
+{% endblock %}
