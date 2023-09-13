@@ -67,13 +67,16 @@ def familiar_dashboard(request):
     for paciente in pacientes_del_familiar:
         registros_diarios = RegistroDiario.objects.filter(paciente=paciente)
         pacientes_con_registros[paciente] = registros_diarios
+
+    user_belongs_to_familiar_group = request.user.groups.filter(name='Familiar').exists()
+
+    group = {
+        'user_belongs_to_familiar_group': user_belongs_to_familiar_group,
+    }
     
-    return render(request, 'familiar/familiar_dashboard.html', {'pacientes_con_registros': pacientes_con_registros})
+    return render(request, 'familiar/familiar_dashboard.html', {'pacientes_con_registros': pacientes_con_registros, 'group':group})
 
  
-
-
-
 @login_required
 def pagina_de_error(request):
     # Lógica para mostrar el dashboard de doctores
@@ -135,11 +138,7 @@ def ficha_paciente(request, paciente_id):
     return render(request, 'doctor/ficha_paciente.html', {'paciente': paciente, 'ficha_paciente': ficha_paciente, 'registros_diarios': registros_diarios, 'formulario': formulario})
 
 
-
-
-
-
-
+@login_required
 def agregar_registro_diario(request, paciente_id):
     paciente = Paciente.objects.get(pk=paciente_id)
 
@@ -156,7 +155,7 @@ def agregar_registro_diario(request, paciente_id):
 
     return render(request, 'agregar_registro_diario.html', {'formulario': formulario, 'paciente': paciente})
 
-
+@login_required
 def crear_paciente(request):
     if request.method == 'POST':
         form = PacienteForm(request.POST)
@@ -168,7 +167,7 @@ def crear_paciente(request):
     else:
         form = PacienteForm()
     return render(request, 'familiar/crear_paciente.html', {'form': form})
-
+@login_required
 def lista_pacientes_sin_doctor(request):
     if request.user.is_authenticated and request.user.groups.filter(name='Doctor').exists():
         # Obtén la lista de pacientes sin doctor asignado (donde doctor es nulo)
@@ -178,7 +177,7 @@ def lista_pacientes_sin_doctor(request):
 
     return redirect('login')  # Redirige a la página de inicio de sesión si no es un usuario doctor o no está autenticado
 
-
+@login_required
 def tomar_paciente_y_ficha(request, paciente_id):
     paciente = get_object_or_404(Paciente, pk=paciente_id)
 
@@ -204,7 +203,7 @@ def tomar_paciente_y_ficha(request, paciente_id):
         'ficha_clinica_form': ficha_clinica_form,
         'paciente': paciente,
     })
-
+@login_required
 def crear_ficha_clinica(request):
     if request.method == 'POST':
         form = FichaClinicaForm(request.POST)

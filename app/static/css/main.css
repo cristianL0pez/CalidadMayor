@@ -46,6 +46,14 @@
     color: white; /* Cambia esto según tu diseño */
 }
 
+/* Estilo para el bloque gris */
+.bloque-gris {
+    background-color: #420d0d; /* Color de fondo gris */
+    padding: 10px; /* Espacio interior para separar el contenido del borde */
+    margin: 10px 0; /* Margen arriba y abajo para separar los bloques grises */
+    border: 10px solid #ccc; /* Borde alrededor del bloque gris */
+}
+
 
 
 

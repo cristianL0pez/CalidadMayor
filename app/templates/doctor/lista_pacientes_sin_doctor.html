@@ -3,25 +3,28 @@
 {% block title %}Dashboard del Doctor{% endblock %}
 
 {% block content %}
-<h1>Lista de Pacientes sin Doctor</h1>
+    <div class="container">
+        <h1 class="mt-4">Lista de Pacientes sin Doctor</h1>
 
-{% if pacientes_sin_doctor %}
-<ul>
-    {% for paciente in pacientes_sin_doctor %}
-    <li>
-        {{ paciente.usuario }}
-        {% if not paciente.doctor %}
-        <a href="{% url 'tomar_paciente_y_ficha' paciente_id=paciente.id %}">Tomar Paciente</a>
+        {% if pacientes_sin_doctor %}
+            <ul class="list-group mt-3">
+                {% for paciente in pacientes_sin_doctor %}
+                    <li class="list-group-item">
+                        {{ paciente.usuario }}
+                        {% if not paciente.doctor %}
+                            <a href="{% url 'tomar_paciente_y_ficha' paciente_id=paciente.id %}" class="btn btn-success float-end">Tomar Paciente</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="mt-3">No hay pacientes sin doctor.</p>
         {% endif %}
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No hay pacientes sin doctor.</p>
-{% endif %}
-<div class="text-center">
-    <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
-    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
-</div>
 
+        <div class="text-center mt-4">
+            <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+            <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
+        </div>
+    </div>
 {% endblock %}
+

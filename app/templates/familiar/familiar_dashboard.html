@@ -3,33 +3,39 @@
 {% block title %}Dashboard Familiar{% endblock %}
 
 {% block content %}
-    <!-- Contenido específico del dashboard de familiares -->
+    
+<div class="container">
     <h1>Bienvenido al Dashboard Familiar</h1>
-    <li><a href={% url 'crear_paciente' %}>crear paciente</a></li>
+
     <h2>Tus familiares:</h2>
-    <ul>
+    <ul class="list-group">
         {% for paciente, registros_diarios in pacientes_con_registros.items %}
-            <li>
-                <hr>
-                <p>Doctor a cargo: {{ paciente.doctor }}</p>
-                <p>Nombre del paciente: {{ paciente.usuario }}</p>
-                <p>Fecha de Nacimiento: {{ paciente.fecha_de_nacimiento }}</p>
-                <hr>
+            <li class="list-group-item">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Doctor a cargo: {{ paciente.doctor }}</h5>
+                        <p class="card-text">Nombre del paciente: {{ paciente.usuario }}</p>
+                        <p class="card-text">Fecha de Nacimiento: {{ paciente.fecha_de_nacimiento }}</p>
+                    </div>
+                </div>
                 <!-- Mostrar los registros diarios del paciente -->
-                <hr>
-                <ul>
-                    <h2>Registros diarios:</h2>
-                    {% for registro in registros_diarios %}
-                        <li>{{ registro.fecha }}: {{ registro.contenido }}</li>
-                    {% empty %}
-                        <li>No hay registros diarios para este paciente.</li>
-                    {% endfor %}
-                </ul>
-                <hr>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Registros diarios:</h5>
+                        <ul class="list-group">
+                            {% for registro in registros_diarios %}
+                                <li class="list-group-item">{{ registro.fecha }}: {{ registro.contenido }}</li>
+                            {% empty %}
+                                <li class="list-group-item">No hay registros diarios para este paciente.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </li>
         {% empty %}
             <p>No tienes familiares registrados.</p>
         {% endfor %}
     </ul>
-    {% block contenido_adicional %}{% endblock %}
+</div>
+    
 {% endblock %}

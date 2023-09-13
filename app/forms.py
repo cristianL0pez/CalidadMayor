@@ -46,6 +46,7 @@ class PacienteForm(forms.ModelForm):
 
 
 
+
 class RegistroDiarioForm(forms.ModelForm):
     class Meta:
         model = RegistroDiario

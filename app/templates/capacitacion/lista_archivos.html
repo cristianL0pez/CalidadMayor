@@ -1,24 +1,26 @@
 {% extends 'base/base_dashboard.html' %}
 
 {% block content %}
-<h1>repositorio capacitacion</h1>
-<ul>
-    {% for archivo in archivos %}
-        <li>
+    <div class="container">
+        <h1 class="mt-4">Repositorio de Capacitación</h1>
+        <ul class="list-group mt-3">
+            {% for archivo in archivos %}
             {{ archivo.nombre }}
-            {% if archivo.tipo == 'video' %}
-                <video width="320" height="240" controls>
-                    <source src="{{ archivo.archivo.url }}" type="video/mp4">
-                    Tu navegador no admite el elemento de video.
-                </video>
-            {% elif archivo.tipo == 'pdf' %}
-                <a href="{{ archivo.archivo.url }}" target="_blank">Ver PDF</a>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
-<div class="text-center">
-    <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
-    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
-</div>
+                <li class="list-group-item">
+                    {% if archivo.tipo == 'video' %}
+                        <video width="320" height="240" controls>
+                            <source src="{{ archivo.archivo.url }}" type="video/mp4">
+                            Tu navegador no admite el elemento de video.
+                        </video>
+                    {% elif archivo.tipo == 'pdf' %}
+                        <a href="{{ archivo.archivo.url }}" target="_blank" class="btn btn-link">Ver PDF</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="text-center mt-4">
+            <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+            <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
+        </div>
+    </div>
 {% endblock %}

@@ -1,11 +1,22 @@
 {% extends 'base/base_dashboard.html' %}
 
 {% block content %}
-    <h2>Crear Paciente</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Crear Paciente</button>
-    </form>
-    <a href="{% url 'familiar_dashboard' %}">Volver a la Lista de Pacientes</a>
+    <div class="container">
+        <h2>Crear Paciente</h2>
+        <form method="post" class="my-4">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Nombre del paciente:</label>
+                {{ form.usuario }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.fecha_de_nacimiento.id_for_label }}">Fecha de Nacimiento:</label>
+                {{ form.fecha_de_nacimiento }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Crear Paciente</button>
+        </form>
+        <a href="{% url 'familiar_dashboard' %}" class="btn btn-secondary">Volver a la Lista de Pacientes</a>
+    </div>
 {% endblock %}

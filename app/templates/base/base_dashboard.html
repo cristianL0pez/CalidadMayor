@@ -24,6 +24,9 @@
                         <li><a href="{% url 'subir_archivo' %}">subir Archivo</a></li>
 
                         {% endif %}
+                        {% if group.user_belongs_to_familiar_group %}
+                        <li><a href={% url 'crear_paciente' %}>ingresar paciente</a></li>
+                        {% endif %}
                     </ul>
                     {% endif %}
                 </nav>
@@ -33,7 +36,7 @@
                             bienvenido {{ user.groups.first }} {{ user.username }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            
+                            <li><a class="dropdown-item" href={% url 'logout' %}> Cerrar sesión</a></li>
                             {% if group.user_belongs_to_doctor_group %}
                             <li><a class="dropdown-item" href={% url 'doctor_dashboard' %}>volver al dashboard</a></li>
                             <li><a class="dropdown-item" href={% url 'logout' %}> Cerrar sesión</a></li>                           

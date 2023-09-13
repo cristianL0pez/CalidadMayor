@@ -26,7 +26,7 @@ class Cuidador(models.Model):
         return self.usuario.username
 # Modelo para los Pacientes
 class Paciente(models.Model):
-    usuario = models.TextField()
+    usuario = models.CharField(max_length=255)
     fecha_de_nacimiento = models.DateField()
     familiar = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pacientes',null=True)  # Relación con el familiar
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='pacientes',null=True)  # Relación con el doctor 

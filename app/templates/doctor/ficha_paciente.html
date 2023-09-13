@@ -3,39 +3,59 @@
 {% block title %}Dashboard del Doctor{% endblock %}
 
 {% block content %}
-  <h2>Ficha del Paciente</h2>
-  <p>Nombre del Paciente: {{ paciente.usuario }}</p>
-  <p>Fecha de Nacimiento: {{ paciente.fecha_de_nacimiento }}</p>
+    <div class="container">
+        <h2 class="mt-4">Ficha del Paciente</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Nombre del Paciente:</strong> {{ paciente.usuario }}</p>
+                <p><strong>Fecha de Nacimiento:</strong> {{ paciente.fecha_de_nacimiento }}</p>
+            </div>
+        </div>
 
-  <h3>Datos de la Ficha Clínica</h3>
-  <p>Fecha de Ingreso: {{ ficha_paciente.fecha_de_ingreso }}</p>
-  <p>Peso: {{ ficha_paciente.peso }} kg</p>
-  <p>Talla: {{ ficha_paciente.talla }} cm</p>
-  <p>Historia Clínica:</p>
-  <p>{{ ficha_paciente.historia_clinica }}</p>
-  <p>Examen Físico:</p>
-  <p>{{ ficha_paciente.examen_fisico }}</p>
-  <h3>Registros Diarios</h3>
-  <ul>
-    {% for registro in registros_diarios %}
-      <li>{{ registro.fecha }}: {{ registro.contenido }}</li>
-    {% empty %}
-      <li>No hay registros diarios.</li>
-    {% endfor %}
-    
-  </ul>
-  <hr>
-  <h3>Agregar Registro Diario</h3>
-  <form method="post">
-    {% csrf_token %}
-    {{ formulario.as_p }}
-    <button type="submit">Guardar Registro Diario</button>
-  </form>
-  <div class="text-center">
-    <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
-    <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
-</div>
-  
+        <h3 class="mt-4">Datos de la Ficha Clínica</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Fecha de Ingreso:</strong> {{ ficha_paciente.fecha_de_ingreso }}</p>
+                <p><strong>Peso:</strong> {{ ficha_paciente.peso }} kg</p>
+                <p><strong>Talla:</strong> {{ ficha_paciente.talla }} cm</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p><strong>Historia Clínica:</strong></p>
+                <p>{{ ficha_paciente.historia_clinica }}</p>
+                <p><strong>Examen Físico:</strong></p>
+                <p>{{ ficha_paciente.examen_fisico }}</p>
+            </div>
+        </div>
 
-  <!-- Agregar otros campos de la ficha clínica aquí -->
+        <h3 class="mt-4">Registros Diarios</h3>
+        <ul class="list-group">
+            {% for registro in registros_diarios %}
+                <li class="list-group-item">{{ registro.fecha }}: {{ registro.contenido }}</li>
+            {% empty %}
+                <li class="list-group-item">No hay registros diarios.</li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+
+        <h3 class="mt-4 text-center">Agregar Registro Diario</h3>
+        <div class="container mt-3">
+            <form method="post" class="text-center">
+                {% csrf_token %}
+                <div class="form-group text-left">
+                    <label for="{{ formulario.contenido.id_for_label }}"></label>
+                    {{ formulario.contenido }}
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Registro Diario</button>
+            </form>
+        </div>
+
+
+        <div class="text-center mt-4">
+            <a href="{% url 'doctor_dashboard' %}" class="btn btn-primary">Volver al Dashboard</a>
+            <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesión</a>
+        </div>
+    </div>
 {% endblock %}
